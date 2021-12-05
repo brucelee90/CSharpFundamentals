@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/GradeBook/bin/Debug/net5.0/GradeBook.dll",
+            "program": "${workspaceFolder}/GradeBook/bin/Debug/net5.0/GradeBook.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/GradeBook",
+            "cwd": "${workspaceFolder}/GradeBook",
             "console": "internalConsole",
             "stopAtEntry": false
         },

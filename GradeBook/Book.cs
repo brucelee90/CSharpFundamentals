@@ -26,28 +26,25 @@ namespace GradeBook
             return this.grades;
         }
 
-        public void ShowStatistics()
+        public Statistics GetStatistics()
         {
             // var grades = new List<double>() { 1.1, 3.4, 5.0, 3.0 };
-
-            var highGrade = double.MinValue;
-            var lowGrade = double.MaxValue;
+            var statistic = new Statistics();
             var result = 0.0;
 
-            System.Console.WriteLine(highGrade);
+            statistic.High = double.MinValue;
+            statistic.Low = double.MaxValue;
 
             foreach (double grade in this.grades)
             {
                 result += grade;
-                lowGrade = Math.Min(grade, lowGrade);
-                highGrade = Math.Max(grade, highGrade);
-
+                statistic.Low = Math.Min(grade, statistic.Low);
+                statistic.High = Math.Max(grade, statistic.High);
             }
 
-            var averageResult = result /= grades.Count;
+            statistic.Average = result /= grades.Count;
 
-            System.Console.WriteLine($"The highest grade is {highGrade}, the lowest grade is {lowGrade} and the and the average is {averageResult}");
-
+            return statistic;
         }
 
     }

@@ -13,8 +13,12 @@ namespace GradeBook
             book.AddGrade(1.0);
             book.AddGrade(2.0);
             book.AddGrade(3.0);
-            book.ShowGrade();
-            book.ShowStatistics();
+
+            var result = book.GetStatistics();
+
+            System.Console.WriteLine($"The highest number is {result.High}");
+            System.Console.WriteLine($"The lowest number is {result.Low}");
+            System.Console.WriteLine($"The average number is {result.Average}");
 
             if (args.Length > 0)
             {
