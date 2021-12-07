@@ -18,7 +18,14 @@ namespace GradeBook
 
         public void AddGrade(double grade)
         {
-            grades.Add(grade);
+            if (grade >= 0 && grade <= 100)
+            {
+                grades.Add(grade);
+            }
+            else
+            {
+                throw new ArgumentException($"Unvalid {nameof(grade)}");
+            }
         }
 
         public List<double> ShowGrade()
@@ -26,23 +33,87 @@ namespace GradeBook
             return this.grades;
         }
 
+        public void AddGrade(char letter)
+        {
+            switch (letter)
+            {
+
+                case 'A':
+                    AddGrade(90);
+                    break;
+
+                case 'B':
+                    AddGrade(80);
+                    break;
+
+                case 'C':
+                    AddGrade(70);
+                    break;
+
+                case 'D':
+                    AddGrade(60);
+                    break;
+
+                case 'E':
+                    AddGrade(50);
+                    break;
+
+                case 'F':
+                    AddGrade(40);
+                    break;
+
+                default:
+                    AddGrade(0);
+                    break;
+            }
+        }
+
         public Statistics GetStatistics()
         {
             // var grades = new List<double>() { 1.1, 3.4, 5.0, 3.0 };
             var statistic = new Statistics();
-            var result = 0.0;
+            var index = 0;
 
+            statistic.Average = 0.0;
             statistic.High = double.MinValue;
             statistic.Low = double.MaxValue;
 
-            foreach (double grade in this.grades)
+            for (index = 0; index < grades.Count; index += 1)
             {
-                result += grade;
-                statistic.Low = Math.Min(grade, statistic.Low);
-                statistic.High = Math.Max(grade, statistic.High);
-            }
+                statistic.Low = Math.Min(grades[index], statistic.Low);
+                statistic.High = Math.Max(grades[index], statistic.High);
+                statistic.Average += grades[index];
+            };
 
-            statistic.Average = result /= grades.Count;
+            statistic.Average /= grades.Count;
+
+            switch (statistic.Average)
+            {
+
+                case var d when d > 90.0:
+                    statistic.Letter = 'A';
+                    break;
+
+                case var d when d > 80.0:
+                    statistic.Letter = 'B';
+                    break;
+
+                case var d when d > 70.0:
+                    statistic.Letter = 'C';
+                    break;
+
+                case var d when d > 60.0:
+                    statistic.Letter = 'D';
+                    break;
+
+                case var d when d > 50.0:
+                    statistic.Letter = 'E';
+                    break;
+
+                default:
+                    statistic.Letter = 'F';
+                    break;
+            }
 
             return statistic;
         }

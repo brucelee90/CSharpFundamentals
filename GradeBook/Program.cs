@@ -8,14 +8,31 @@ namespace GradeBook
         static void Main(string[] args)
         {
 
-            var book = new Book("Lee's Book", 2.3);
-            book.AddGrade(4.0);
-            book.AddGrade(1.0);
-            book.AddGrade(2.0);
-            book.AddGrade(3.0);
+            var book = new Book("Lee's Book", 50);
+
+            // Loop
+
+            while (true)
+            {
+                var input = Console.ReadLine();
+
+                if (input == "q")
+                {
+                    break;
+                }
+
+                try
+                {
+                    var grade = double.Parse(input);
+                    book.AddGrade(grade);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
+            }
 
             var result = book.GetStatistics();
-
             System.Console.WriteLine($"The highest number is {result.High}");
             System.Console.WriteLine($"The lowest number is {result.Low}");
             System.Console.WriteLine($"The average number is {result.Average}");
