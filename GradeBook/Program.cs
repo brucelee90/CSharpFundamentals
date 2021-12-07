@@ -33,6 +33,8 @@ namespace GradeBook
             }
 
             var result = book.GetStatistics();
+
+            System.Console.WriteLine(Book.CATEGORY);
             System.Console.WriteLine($"The highest number is {result.High}");
             System.Console.WriteLine($"The lowest number is {result.Low}");
             System.Console.WriteLine($"The average number is {result.Average}");

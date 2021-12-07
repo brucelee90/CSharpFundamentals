@@ -8,7 +8,11 @@ namespace GradeBook
     public class Book
     {
         private List<double> grades;
-        public string Name;
+        private string name;
+        public string Name { get; set; }
+        // const vars will always be static memebers of a class.
+        public const string CATEGORY = "3";
+
 
         public Book(string name, double grade)
         {

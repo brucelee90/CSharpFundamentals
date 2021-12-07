@@ -5,6 +5,22 @@ namespace GradeBook
 {
     public class TypeTests
     {
+        public delegate string WriteLogDelegate(string logMessage);
+
+        [Fact]
+        public void PointToDelegateMethod()
+        {
+            WriteLogDelegate log;
+            log = ReturnMessage;
+            var logMessage = log("servus");
+            Assert.Equal("servus", logMessage);
+        }
+
+        public string ReturnMessage(string log)
+        {
+            return log;
+        }
+
         [Fact]
         public void GetBookReturnsDifferentObjects()
         {
