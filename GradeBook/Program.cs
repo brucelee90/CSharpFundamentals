@@ -5,10 +5,16 @@ namespace GradeBook
 {
     class Program
     {
+
+        static void OnGradeAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("Grade was added");
+        }
         static void Main(string[] args)
         {
 
             var book = new Book("Lee's Book", 50);
+            book.GradeAdded += OnGradeAdded;
 
             // Loop
 
