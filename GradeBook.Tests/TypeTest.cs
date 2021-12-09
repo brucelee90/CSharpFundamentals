@@ -49,7 +49,7 @@ namespace GradeBook
 
         Book GetBook(string name)
         {
-            var book = new Book(name, 0.0);
+            var book = new InMemoryBook(name, 0.0);
             return book;
         }
 
@@ -78,7 +78,7 @@ namespace GradeBook
 
         private void GetBookSetName(Book book, string name)
         {
-            book = new Book(name, 0.0);
+            book = new InMemoryBook(name, 0.0);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace GradeBook
 
         private void GetBookSetName(ref Book book, string name)
         {
-            book = new Book(name, 0.0);
+            book = new InMemoryBook(name, 0.0);
         }
 
         [Fact]

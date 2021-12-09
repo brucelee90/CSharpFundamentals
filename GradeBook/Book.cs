@@ -20,13 +20,24 @@ namespace GradeBook
         }
     }
 
-    public abstract class Book : NamedObject
+    public interface IBook
+    {
+        void AddGrade(double grade);
+        Statistics GetStatistics();
+        string Name { get; }
+        event GradeAddedDelegate GradeAdded;
+    }
+
+    public abstract class Book : NamedObject, IBook
     {
         public Book(string name, double grade) : base(name, grade)
         {
 
         }
+
+        public abstract event GradeAddedDelegate GradeAdded;
         public abstract void AddGrade(double grade);
+        public abstract Statistics GetStatistics();
     }
 
     public class InMemoryBook : Book
@@ -60,7 +71,7 @@ namespace GradeBook
             }
         }
 
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
 
         public List<double> ShowGrade()
         {
@@ -102,54 +113,9 @@ namespace GradeBook
             }
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
-            // var grades = new List<double>() { 1.1, 3.4, 5.0, 3.0 };
-            var statistic = new Statistics();
-            var index = 0;
-
-            statistic.Average = 0.0;
-            statistic.High = double.MinValue;
-            statistic.Low = double.MaxValue;
-
-            for (index = 0; index < grades.Count; index += 1)
-            {
-                statistic.Low = Math.Min(grades[index], statistic.Low);
-                statistic.High = Math.Max(grades[index], statistic.High);
-                statistic.Average += grades[index];
-            };
-
-            statistic.Average /= grades.Count;
-
-            switch (statistic.Average)
-            {
-
-                case var d when d > 90.0:
-                    statistic.Letter = 'A';
-                    break;
-
-                case var d when d > 80.0:
-                    statistic.Letter = 'B';
-                    break;
-
-                case var d when d > 70.0:
-                    statistic.Letter = 'C';
-                    break;
-
-                case var d when d > 60.0:
-                    statistic.Letter = 'D';
-                    break;
-
-                case var d when d > 50.0:
-                    statistic.Letter = 'E';
-                    break;
-
-                default:
-                    statistic.Letter = 'F';
-                    break;
-            }
-
-            return statistic;
+            return new Statistics(grades).CalculateMinMaxAvg();
         }
 
         public override bool Equals(object obj)
@@ -166,7 +132,5 @@ namespace GradeBook
         {
             return base.ToString();
         }
-
-
     }
 }

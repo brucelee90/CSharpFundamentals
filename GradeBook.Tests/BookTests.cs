@@ -9,7 +9,7 @@ namespace GradeBook
         public void Test1()
         {
             // arrange
-            var book = new Book("", 50.0);
+            var book = new InMemoryBook("", 50.0);
             book.AddGrade(89.1);
             book.AddGrade(90.5);
             book.AddGrade(77.3);
@@ -25,13 +25,27 @@ namespace GradeBook
             Assert.Equal('C', result.Letter);
         }
 
+        [Fact]
         public void FieldTest()
         {
-            var book = new Book("Lee's Book", 50);
+            var book = new InMemoryBook("Lee's Book", 50);
             book.Name = "New Name";
 
             Assert.Equal("New Name", book.Name);
-            Assert.Equal("3", Book.CATEGORY);
+            Assert.Equal("3", InMemoryBook.CATEGORY);
+        }
+
+        [Fact]
+        public void DiskBookTest()
+        {
+            var diskBook = new DiskBook("DiskBook", 50);
+
+            var result = diskBook.GetStatistics();
+
+            Assert.Equal(50, result.Average, 1);
+            Assert.Equal(50, result.High, 1);
+            Assert.Equal(50, result.Low, 1);
+            Assert.Equal('F', result.Letter);
         }
     }
 }
