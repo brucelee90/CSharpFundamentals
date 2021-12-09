@@ -7,16 +7,28 @@ namespace GradeBook
 {
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-    public class Book
+    public class NamedObject
+    {
+        public NamedObject(string name)
+        {
+            Name = name;
+        }
+
+        public string Name
+        {
+            get; set;
+        }
+    }
+
+    public class Book : NamedObject
     {
         private List<double> grades;
         private string name;
-        public string Name { get; set; }
         // const vars will always be static memebers of a class.
         public const string CATEGORY = "3";
 
 
-        public Book(string name, double grade)
+        public Book(string name, double grade) : base(name)
         {
             this.grades = new List<double>() { grade };
             Name = name;

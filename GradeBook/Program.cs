@@ -18,6 +18,27 @@ namespace GradeBook
 
             // Loop
 
+            EnterGrades(book);
+
+            var result = book.GetStatistics();
+
+            System.Console.WriteLine(Book.CATEGORY);
+            System.Console.WriteLine($"The highest number is {result.High}");
+            System.Console.WriteLine($"The lowest number is {result.Low}");
+            System.Console.WriteLine($"The average number is {result.Average}");
+
+            if (args.Length > 0)
+            {
+                Console.WriteLine($"Hello {args[0]} !");
+            }
+            else
+            {
+                Console.WriteLine("Hello");
+            }
+        }
+
+        private static void EnterGrades(Book book)
+        {
             while (true)
             {
                 var input = Console.ReadLine();
@@ -36,22 +57,6 @@ namespace GradeBook
                 {
                     System.Console.WriteLine(ex.Message);
                 }
-            }
-
-            var result = book.GetStatistics();
-
-            System.Console.WriteLine(Book.CATEGORY);
-            System.Console.WriteLine($"The highest number is {result.High}");
-            System.Console.WriteLine($"The lowest number is {result.Low}");
-            System.Console.WriteLine($"The average number is {result.Average}");
-
-            if (args.Length > 0)
-            {
-                Console.WriteLine($"Hello {args[0]} !");
-            }
-            else
-            {
-                Console.WriteLine("Hello");
             }
         }
     }
