@@ -9,7 +9,7 @@ namespace GradeBook
 
     public class NamedObject
     {
-        public NamedObject(string name)
+        public NamedObject(string name, double grade)
         {
             Name = name;
         }
@@ -20,21 +20,31 @@ namespace GradeBook
         }
     }
 
-    public class Book : NamedObject
+    public abstract class Book : NamedObject
+    {
+        public Book(string name, double grade) : base(name, grade)
+        {
+
+        }
+        public abstract void AddGrade(double grade);
+    }
+
+    public class InMemoryBook : Book
     {
         private List<double> grades;
         private string name;
         // const vars will always be static memebers of a class.
         public const string CATEGORY = "3";
 
-
-        public Book(string name, double grade) : base(name)
+        public InMemoryBook(string name, double grade) : base(name, grade)
         {
             this.grades = new List<double>() { grade };
             Name = name;
         }
 
-        public void AddGrade(double grade)
+
+
+        public override void AddGrade(double grade)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -141,6 +151,22 @@ namespace GradeBook
 
             return statistic;
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
 
     }
 }

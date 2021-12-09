@@ -13,7 +13,7 @@ namespace GradeBook
         static void Main(string[] args)
         {
 
-            var book = new Book("Lee's Book", 50);
+            var book = new InMemoryBook("Lee's Book", 50);
             book.GradeAdded += OnGradeAdded;
 
             // Loop
@@ -22,7 +22,7 @@ namespace GradeBook
 
             var result = book.GetStatistics();
 
-            System.Console.WriteLine(Book.CATEGORY);
+            System.Console.WriteLine(InMemoryBook.CATEGORY);
             System.Console.WriteLine($"The highest number is {result.High}");
             System.Console.WriteLine($"The lowest number is {result.Low}");
             System.Console.WriteLine($"The average number is {result.Average}");
@@ -37,7 +37,7 @@ namespace GradeBook
             }
         }
 
-        private static void EnterGrades(Book book)
+        private static void EnterGrades(InMemoryBook book)
         {
             while (true)
             {
